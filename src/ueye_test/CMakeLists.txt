@@ -6,6 +6,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   cv_bridge
   marker_publisher
+  serial
 )
 
 ###################################
@@ -31,6 +32,7 @@ catkin_package(
 include_directories(
     ${catkin_INCLUDE_DIRS}
     ${OpenCV_INCLUDE_DIRS}
+    ${serial_INCLUDE_DIRS}
     )
 
 add_executable(ueye_test src/image_test.cpp)
