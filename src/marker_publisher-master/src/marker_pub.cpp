@@ -73,9 +73,9 @@ void MarkerPosePublisher::callBackColor(const sensor_msgs::ImageConstPtr& msg)
      else
        detected_markers[i].calculateExtrinsics(markerSizeMeters, TheCameraParameters.CameraMatrix, TheCameraParameters.Distorsion, false);
    
-     detected_markers[i].draw(cv_ptr->image, cv::Scalar(0, 0, 255), 1);
+//     detected_markers[i].draw(cv_ptr->image, cv::Scalar(0, 0, 255), 1);
 //     aruco::CvDrawingUtils::draw3dCube(cv_ptr->image, detected_markers[i], TheCameraParameters);
-     aruco::CvDrawingUtils::draw3dAxis(cv_ptr->image, detected_markers[i], TheCameraParameters);
+//     aruco::CvDrawingUtils::draw3dAxis(cv_ptr->image, detected_markers[i], TheCameraParameters);
 
      tf::Transform object_transform = arucoMarker2Tf(detected_markers[i]);
      
