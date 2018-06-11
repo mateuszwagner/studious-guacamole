@@ -6,7 +6,7 @@
 mtracker::Serial com("/dev/ttyUSB0");
 
 void markerCallback(const marker_publisher::MarkerArray& markerArrayMsg) {
-//    ROS_INFO_STREAM("Image no." << /*imageMsg*/->header.seq);
+    com.setVelocities(0.0, 1.0);
 }
 
 void imageCallback(const sensor_msgs::ImageConstPtr& imageMsg) {
