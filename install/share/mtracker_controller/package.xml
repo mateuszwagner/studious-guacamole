@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package>
+  <name>mtracker_controller</name>
+  <version>0.0.1</version>
+  <description>The package used for recognizing markers and controlling the mtracker robot</description>
+  <maintainer email="mateusz.wagner@student.put.poznan.pl">Mateusz Wagner</maintainer>
+  <maintainer email="erf_sh@yahoo.com">Erfan Sholehkhah</maintainer>
+  <license>BSD</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <build_depend>roscpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>ueye_cam</build_depend>
+  <build_depend>image_transport</build_depend>
+  <build_depend>marker_publisher</build_depend>
+
+  <run_depend>roscpp</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>ueye_cam</run_depend>
+  <run_depend>image_transport</run_depend>
+  <run_depend>marker_publisher</run_depend>
+
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+  </export>
+</package>

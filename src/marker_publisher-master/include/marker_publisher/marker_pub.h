@@ -2,9 +2,10 @@
 #include <std_msgs/String.h>
 #include <sensor_msgs/image_encodings.h>
 #include <cv_bridge/cv_bridge.h>
-#include <opencv2/opencv.hpp> 
+#include <opencv2/opencv.hpp>
+#include <aruco/aruco.h>
 #include <string>
-#include <aruco.h>
+//#include <aruco.h>
 #include <tf/transform_broadcaster.h>
 #include <visualization_msgs/Marker.h>
 #include <geometry_msgs/PoseWithCovariance.h>

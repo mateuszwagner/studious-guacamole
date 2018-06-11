@@ -1,5 +1,0 @@
-<launch>
-  <include file="$(find ueye_cam)/launch/rgb8.launch"/>
-
-  <node pkg="ueye_test" type="image_test" name="subscriber" output="screen"/>
-</launch>

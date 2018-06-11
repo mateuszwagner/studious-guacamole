@@ -1,0 +1,12 @@
+<launch>
+    <include file="$(find ueye_cam)/launch/bayer_rggb_image_proc.launch"/>
+
+    <node pkg="marker_publisher" type="markerpub" name="markerpub" output="screen" >
+    <param name="TheCameraParameters_path" value="$(find mtracker_controller)/config/intrinsics.yaml" />
+    <param name="camera_frame" value="camera_frame" />
+    <param name="markerSizeMeters" value="0.2" />
+    <param name="dict_type" value="ARUCO" />
+    <remap from="/markerpub/image_raw" to="/camera/image_raw" /></node>
+
+    <node pkg="mtracker_controller" type="mtracker" name="subscriber" output="screen"/>
+</launch>

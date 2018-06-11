@@ -152,8 +152,6 @@ void UEyeCamNodelet::onInit() {
     cam_id_ = ANY_CAMERA;
   }
 
-  loadIntrinsicsFile();
-
   // Setup dynamic reconfigure server
   ros_cfg_ = new ReconfigureServer(ros_cfg_mutex_, local_nh);
   ReconfigureServer::CallbackType f;
