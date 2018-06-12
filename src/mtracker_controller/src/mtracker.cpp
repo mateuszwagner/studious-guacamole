@@ -7,15 +7,16 @@
 mtracker::Serial *com;
 
 void markerCallback(const marker_publisher::MarkerArrayConstPtr& markerArrayMsg) {
-//    ROS_INFO_STREAM("MarkerArrayMsg no." << markerArrayMsg->markers.size());
-    if (markerArrayMsg->markers.size() > 0) {
-        ROS_INFO_STREAM("I GOT MARKER");
+    if (markerArrayMsg->markers.size() == 0)
+        return;
 
-        if (com->isOpen()) {
-            ROS_INFO_STREAM("Set Velocity" << markerArrayMsg->header.seq);
-            com->setVelocities(0.0, 1.0);
-            com->writeFrame();
-        }
+    for (marker_publisher::Marker marker: markerArrayMsg->markers) {
+        ROS_INFO_STREAM("Marker no." << marker.idx);
+    }
+
+    if (com->isOpen()) {
+        com->setVelocities(0.0, 1.0);
+        com->writeFrame();
     }
 }
 
