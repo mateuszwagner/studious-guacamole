@@ -11,12 +11,21 @@ void markerCallback(const marker_publisher::MarkerArray& markerArrayMsg) {
     }
 }
 
+void imageCallback(const sensor_msgs::ImageConstPtr& imageMsg) {
+    ROS_INFO_STREAM("Image no." << imageMsg->header.seq);
+    if (com->isOpen()) {
+        com->setVelocities(0.0, 1.0);
+    }
+}
+
 int main(int argc, char** argv) {
     ros::init(argc, argv, "mtracker");
     ros::NodeHandle nh;
 
-    ros::Subscriber marker_sub = nh.subscribe("marker_publisher/MarkerArray", 10, &markerCallback);
+    image_transport::ImageTransport it(nh);
+    image_transport::Subscriber it_sub = it.subscribe("/camera/image_raw", 10, imageCallback, image_transport::TransportHints("compressed"));
 
+    ros::Subscriber marker_sub = nh.subscribe("marker_publisher/MarkerArray", 10, &markerCallback);
     com = new mtracker::Serial("/dev/ttyUSB0");
     com->open(921600);
 

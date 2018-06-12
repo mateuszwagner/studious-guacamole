@@ -12,5 +12,4 @@
 
 <node pkg="mtracker_controller" type="mtracker" name="subscriber" output="screen"/>
 
-
 </launch>
