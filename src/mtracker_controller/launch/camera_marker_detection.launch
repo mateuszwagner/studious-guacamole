@@ -10,4 +10,7 @@
       <remap from="/markerpub/image_raw" to="/camera/image_raw" />
 </node>
 
+<!--<node pkg="mtracker_controller" type="mtracker" name="subscriber" output="screen"/>-->
+
+
 </launch>
