@@ -2,7 +2,7 @@
 #include <cv_bridge/cv_bridge.h>
 #include "../include/serial.h"
 #include <marker_publisher/marker_pub.h>
-#include <geometry_msgs/PoseWithCovariance.h>
+//#include <geometry_msgs/PoseWithCovariance.h>
 
 mtracker::Serial *com;
 
