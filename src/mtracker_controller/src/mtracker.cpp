@@ -3,9 +3,12 @@
 #include "../include/serial.h"
 #include <marker_publisher/marker_pub.h>
 
+mtracker::Serial *com;
 
 void markerCallback(const marker_publisher::MarkerArray& markerArrayMsg) {
-    com.setVelocities(0.0, 1.0);
+    if (com->isOpen()) {
+        com->setVelocities(0.0, 1.0);
+    }
 }
 
 void imageCallback(const sensor_msgs::ImageConstPtr& imageMsg) {
@@ -20,15 +23,14 @@ int main(int argc, char** argv) {
     image_transport::Subscriber it_sub = it.subscribe("/camera/image_raw", 10, imageCallback, image_transport::TransportHints("compressed"));
 
     ros::Subscriber marker_sub = nh.subscribe("marker_publisher/MarkerArray", 10, &markerCallback);
+    com = new mtracker::Serial("/dev/ttyUSB0");
+    com->open(921600);
 
-    mtracker::Serial com("/dev/ttyUSB0");
-    com.open(921600);
-
-    if (com.isOpen()) {
-      com.setMode(MODE_SET_ODOMETRY | MODE_MOTORS_ON);
-      com.setPose(0.0, 0.0, 0.0);
-      com.setVelocities(0.0, 0.0);
-      com.writeFrame();
+    if (com->isOpen()) {
+      com->setMode(MODE_SET_ODOMETRY | MODE_MOTORS_ON);
+      com->setPose(0.0, 0.0, 0.0);
+      com->setVelocities(0.0, 0.0);
+      com->writeFrame();
 
       ROS_INFO("MTracker [OK]");
     }
