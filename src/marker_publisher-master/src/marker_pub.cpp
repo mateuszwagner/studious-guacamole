@@ -103,9 +103,9 @@ void MarkerPosePublisher::callBackColor(const sensor_msgs::ImageConstPtr& msg)
    }
    
    markers_pub_array.publish(marker_msg_pub);
-
-   //cv::imshow("Image with markers", cv_ptr->image);
-   //cv::waitKey(1) ;
+   
+//   cv::imshow("Image with markers", cv_ptr->image);
+//   cv::waitKey(1) ;
 }
 
 
@@ -150,3 +150,24 @@ void MarkerPosePublisher::publish_marker(geometry_msgs::Pose marker_pose, int ma
 
     markers_pub_tf.publish(marker);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -20,10 +20,16 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-  INCLUDE_DIRS include
+#  INCLUDE_DIRS include
 #  LIBRARIES ueye_cam
 #  CATKIN_DEPENDS roscpp std_msgs
 #  DEPENDS system_lib
+)
+
+add_message_files(
+  FILES
+  Marker.msg
+  MarkerArray.msg
 )
 
 ###########
@@ -38,6 +44,8 @@ include_directories(
 add_executable(mtracker src/mtracker.cpp)
 
 add_dependencies(mtracker ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
+add_dependencies(markerpub ${catkin_EXPORTED_TARGETS})
 
 target_link_libraries(mtracker
     ${catkin_LIBRARIES}

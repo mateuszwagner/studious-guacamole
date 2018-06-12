@@ -2,30 +2,28 @@
 #include <cv_bridge/cv_bridge.h>
 #include "../include/serial.h"
 #include <marker_publisher/marker_pub.h>
+#include <geometry_msgs/PoseWithCovariance.h>
 
 mtracker::Serial *com;
 
 void markerCallback(const marker_publisher::MarkerArrayConstPtr& markerArrayMsg) {
-    ROS_INFO_STREAM("MarkerArrayMsg no." << markerArrayMsg->header.seq);
-    if (com->isOpen()) {
-        ROS_INFO_STREAM("Set Velocity" << markerArrayMsg->header.seq);
-        com->setVelocities(0.0, 1.0);
-        com->writeFrame();
+//    ROS_INFO_STREAM("MarkerArrayMsg no." << markerArrayMsg->markers.size());
+    if (markerArrayMsg->markers.size() > 0) {
+        ROS_INFO_STREAM("I GOT MARKER");
+
+        if (com->isOpen()) {
+            ROS_INFO_STREAM("Set Velocity" << markerArrayMsg->header.seq);
+            com->setVelocities(0.0, 1.0);
+            com->writeFrame();
+        }
     }
-}
-
-void imageCallback(const sensor_msgs::ImageConstPtr& imageMsg) {
-
 }
 
 int main(int argc, char** argv) {
     ros::init(argc, argv, "mtracker");
     ros::NodeHandle nh;
 
-    image_transport::ImageTransport it(nh);
-    image_transport::Subscriber it_sub = it.subscribe("/camera/image_raw", 10, imageCallback, image_transport::TransportHints("compressed"));
-
-    ros::Subscriber marker_sub = nh.subscribe("marker_publisher/MarkerArray", 10, &markerCallback);
+    ros::Subscriber marker_sub = nh.subscribe("/markerpub/MarkerArray", 10, &markerCallback);
     com = new mtracker::Serial("/dev/ttyUSB0");
     com->open(921600);
 
