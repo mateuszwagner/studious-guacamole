@@ -5,17 +5,17 @@
 
 mtracker::Serial *com;
 
-void markerCallback(const marker_publisher::MarkerArray& markerArrayMsg) {
+void markerCallback(const marker_publisher::MarkerArrayConstPtr& markerArrayMsg) {
+    ROS_INFO_STREAM("MarkerArrayMsg no." << markerArrayMsg->header.seq);
     if (com->isOpen()) {
+        ROS_INFO_STREAM("Set Velocity" << markerArrayMsg->header.seq);
         com->setVelocities(0.0, 1.0);
+        com->writeFrame();
     }
 }
 
 void imageCallback(const sensor_msgs::ImageConstPtr& imageMsg) {
-    ROS_INFO_STREAM("Image no." << imageMsg->header.seq);
-    if (com->isOpen()) {
-        com->setVelocities(0.0, 1.0);
-    }
+
 }
 
 int main(int argc, char** argv) {
